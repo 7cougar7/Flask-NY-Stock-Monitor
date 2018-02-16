@@ -1,0 +1,89 @@
+#topLogo{
+    height:10%;
+    width:10%;
+
+    float:left;
+    justify-content:flex-start;
+    }
+.topstyle div{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:stretch;
+}
+
+
+
+#searchBar{
+    float:right;
+    padding:0px;
+    margin:60px;
+    height:20px;
+    }
+
+.topStyle{
+
+    width: 100%;
+    display: flex;
+    align-items:stretch;
+    justify-content: space-between;
+    }
+
+.topMenu{
+    vertical-align:bottom;
+    display: flex;
+    height: 25px;
+    width: 150px;
+    list-style-type: none;
+    overflow:hidden;
+    padding:10px;
+    margin:0;
+    background-color: #333;
+    color:white;
+   /* width:15em;*/
+    }
+
+
+#topMenu{
+    vertical-align:middle;
+    margin:50px;
+    display:flex;
+    }
+
+.topMenu:hover{
+        background-color:#111;
+
+    }
+
+#sideMarket{
+    float:left;
+    list-style-type:none;
+    overflow:hidden;
+    display:block;
+    padding:0px;
+    background-color:#dddddd;
+    width:20em;
+   height:50em;
+    }
+
+.sideMarket{
+    height:5em;
+    outline-style:solid;
+
+    }
+
+.navbar {
+    overflow: hidden;
+    background-color: #003b8e;
+    position: fixed; /* Set the navbar to fixed position */
+    bottom: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+    color:white;
+}
+.navbar a{
+    color:white;
+    }
+.navbar span{
+    margin:5em;
+    }
+
