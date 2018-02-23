@@ -1,58 +1,37 @@
 $(document).ready(function() {
+  var loadSideM = function(iD, Sym) {
+  	var changeSign="";
+    $.getJSON("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + Sym + "&outputsize=compact&apikey=XB3FP5FNA3EUUPGH", function(json) {
+      var data1 = json;
+      var date = (data1["Meta Data"]["3. Last Refreshed"]);
+      var openPrice = (data1["Time Series (Daily)"][date]["1. open"]);
+      $("#MN" + iD).replaceWith(Sym + " Opening Price: $" + openPrice);
+      $.getJSON("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + Sym + "&interval=1min&apikey=XB3FP5FNA3EUUPGH", function(json1) {
+        var data3 = json1;
+        var date1 = (data3["Meta Data"]["3. Last Refreshed"]);
+        var currPrice = (data3["Time Series (1min)"][date1]["1. open"]);
+        console.log(currPrice);
+        $("#CP" + iD).replaceWith(Sym + " Current Price: $" + currPrice);
+        var diffPrice = (parseFloat(currPrice)-parseFloat(openPrice)).toFixed(2);
+        if (diffPrice<0){
+        changeSign="-";
+        diffPrice=Math.abs(diffPrice);
+        }
+        $("#DP"+iD).replaceWith(Sym + " $ Difference: "+changeSign+"$"+diffPrice);
+        var perChange=((((parseFloat(currPrice)/parseFloat(openPrice))*100)-100).toFixed(2));
+        $("#PC"+iD).replaceWith(Sym + " % Difference: "+perChange+"%");
+      })
+    })
+  };
+  loadSideM("1", "BA");
+  loadSideM("2", "KO");
+  loadSideM("3", "SBUX");
+  loadSideM("4", "DIS");
+  loadSideM("5", "NDX");
+  loadSideM("6", "AAPL");
+  loadSideM("7", "DJIA");
+  loadSideM("8", "MSFT");
+  loadSideM("9", "GOOGL");
+  loadSideM("10","SPX");
+});
 
-
-    var d = new Date();
-    var date1= ((d.getMonth()+1)<10 ? '0' : '') + (d.getMonth()+1) + '-' +(d.getDate()<10 ? '0' : '') + d.getDate() + "-"  +d.getFullYear()
-
-    var is_weekend =  function(date2){
-    var dt = new Date(date2);
-    if(dt.getDay() == 6)
-       {
-        return 1;
-        }else if(dt.getDay()==0){
-        return 2;
-    }else{
-        return 0;
-    }
-}
-
-   // var date =  d.getFullYear() + '-' + ((d.getMonth()+1)<10 ? '0' : '') + (d.getMonth()+1) + '-' + (d.getDate()<10 ? '0' : '') + (d.getDate()-is_weekend(date1));
-   // alert('weekend: '+is_weekend(date1));
-
-var dateTime;
-var data;
-var data1;
-var data2;
-var data3;
-var openingPrice=0;
-var currentPrice=0;
-
-
-
-                $("#sideMarket1 a").load("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=KO&outputsize=compact&apikey=XB3FP5FNA3EUUPGH", function(json, status) {
-                   // alert(status)
-                    data = json;
-                    data1 = JSON.parse(data);
-                     date=(data1["Meta Data"]["3. Last Refreshed"]);
-                    openingPrice = parseFloat(data1["Time Series (Daily)"][date]["1. open"]);
-                    $("#sideMarket1 a").replaceWith("Coca-Cola's Opening Price for "+date+ ": $"+openingPrice);
-                    //alert("1");
-                   // $("#sideMarket3 a").replaceWith(parseFloat(currentPrice)-parseFloat(openingPrice));
-                    });
-
-                $("#sideMarket2 a").load("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=KO&interval=1min&apikey=XB3FP5FNA3EUUPGH",function(json1){
-                 data2 = json1;
-                //alert(status1)
-                    data3 = JSON.parse(data2);
-                    //alert("2");
-                    dateTime=(data3["Meta Data"]["3. Last Refreshed"]);
-                    //alert("dateTime: "+dateTime);
-                    currentPrice = parseFloat(data3["Time Series (1min)"][dateTime]["1. open"]);
-                    $("#sideMarket2 a").replaceWith("Coca-Cola's Current Price for "+dateTime+ ": $"+currentPrice);
-                    $("#sideMarket3 a").replaceWith("Change in Price from opening: $"+(parseFloat(currentPrice)-parseFloat(openingPrice)));
-
-                });
-
-
-//parseFloat(data1["Time Series (Daily)"][date]["1. open"])-
-                });
