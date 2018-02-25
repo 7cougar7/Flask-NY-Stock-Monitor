@@ -1,89 +1,125 @@
-#topLogo{
-    height:10%;
-    width:10%;
+html{
+    background-color:#edf7ff;
+}
 
-    float:left;
-    justify-content:flex-start;
-    }
-.topstyle div{
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:stretch;
+#main {
+  display: none;
+}
+
+#loading {
+  padding: 200px 0;
+  text-align: center;
+}
+
+#underLogo {
+  font-family: "Philosopher";
+  font-size: 45px;
 }
 
 
+#topLogo {
+  height: 10%;
+  width: 10%;
+  float: left;
+  justify-content: flex-start;
+}
 
-#searchBar{
-    float:right;
-    padding:0px;
-    margin:60px;
-    height:20px;
-    }
+.topstyle div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
 
-.topStyle{
+#searchBar {
+  float: right;
+  padding: 0px;
+  margin: 60px;
+  height: 20px;
+}
 
-    width: 100%;
-    display: flex;
-    align-items:stretch;
-    justify-content: space-between;
-    }
+.topStyle {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
 
-.topMenu{
-    vertical-align:bottom;
-    display: flex;
-    height: 25px;
-    width: 150px;
-    list-style-type: none;
-    overflow:hidden;
-    padding:10px;
-    margin:0;
-    background-color: #333;
-    color:white;
-   /* width:15em;*/
-    }
+.topMenu li {
+  list-style-type: none;
+}
 
+.topMenu li a {
+  vertical-align: bottom;
+  display: flex;
+  height: 25px;
+  width: 150px;
+  list-style-type: none;
+  overflow: hidden;
+  padding: 10px;
+  margin: 0;
+  background-color: #333;
+  color: white;
+  /* width:15em;*/
+}
 
-#topMenu{
-    vertical-align:middle;
-    margin:50px;
-    display:flex;
-    }
+.topMenu {
+  vertical-align: middle;
+  margin: 50px;
+  display: flex;
+}
 
-.topMenu:hover{
-        background-color:#111;
+.topMenu li a:hover {
+  background-color: #111;
+}
 
-    }
+.sideMarket {
+  float: left;
+  list-style-type: none;
+  overflow: hidden;
+  display: block;
+  padding: 0px;
+  background-color: #dddddd;
+  width: auto;
+  height: 50em;
+}
 
-.sideMarket{
-    float:left;
-    list-style-type:none;
-    overflow:hidden;
-    display:block;
-    padding:0px;
-    background-color:#dddddd;
-    width:20em;
-   height:50em;
-    }
-
-.sideMarket li{
-    height:5em;
-    outline-style:solid;
-
-    }
+.sideMarket li {
+  height: 5em;
+  width:auto;
+  outline-style: solid;
+    display: block;
+    padding: 0 1.2em;
+}
 
 .navbar {
-    overflow: hidden;
-    background-color: #003b8e;
-    position: fixed; /* Set the navbar to fixed position */
-    bottom: 0; /* Position the navbar at the top of the page */
-    width: 100%; /* Full width */
-    color:white;
+  overflow: hidden;
+  background-color: #003b8e;
+  position: fixed;
+  /* Set the navbar to fixed position */
+  bottom: 0;
+  /* Position the navbar at the top of the page */
+  width: 100%;
+  /* Full width */
+  color: white;
 }
-.navbar a{
-    color:white;
-    }
-.navbar span{
-    margin:5em;
-    }
 
+#recomBuy {
+  display: flex;
+}
+
+table#t01 tr:nth-child(odd) {
+  background-color: #eee;
+}
+
+table#t01 tr:nth-child(even) {
+  background-color: #fff;
+}
+
+.navbar a {
+  color: white;
+}
+
+.navbar span {
+  margin: 5em;
+}
