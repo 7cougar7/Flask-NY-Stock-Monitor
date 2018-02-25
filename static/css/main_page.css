@@ -2,10 +2,6 @@ html{
     background-color:#edf7ff;
 }
 
-#main {
-  display: none;
-}
-
 #loading {
   padding: 200px 0;
   text-align: center;
@@ -16,7 +12,13 @@ html{
   font-size: 45px;
 }
 
-
+#main {
+  text-align: center;
+  display: none
+}
+#recomSell{
+    display:grid;
+}
 #topLogo {
   height: 10%;
   width: 10%;
@@ -81,15 +83,15 @@ html{
   padding: 0px;
   background-color: #dddddd;
   width: auto;
-  height: 50em;
+  height: auto;
 }
 
 .sideMarket li {
-  height: 5em;
-  width:auto;
+  height: auto;
+  width: auto;
   outline-style: solid;
-    display: block;
-    padding: 0 1.2em;
+  display: block;
+  padding: 0 1.2em;
 }
 
 .navbar {
@@ -102,17 +104,18 @@ html{
   width: 100%;
   /* Full width */
   color: white;
+  height:20px;
 }
 
 #recomBuy {
-  display: flex;
+  display: grid;
 }
 
-table#t01 tr:nth-child(odd) {
+table tr:nth-child(odd) {
   background-color: #eee;
 }
 
-table#t01 tr:nth-child(even) {
+table tr:nth-child(even) {
   background-color: #fff;
 }
 
@@ -122,4 +125,8 @@ table#t01 tr:nth-child(even) {
 
 .navbar span {
   margin: 5em;
+}
+
+#filler{
+height:30px;
 }

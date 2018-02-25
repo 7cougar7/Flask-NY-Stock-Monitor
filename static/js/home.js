@@ -1,124 +1,121 @@
 $(document).ready(function() {
-  var loadMainM = function(Sym) {
-    var changeSign = "";
-    $.getJSON("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + Sym + "&outputsize=compact&apikey=XB3FP5FNA3EUUPGH", function(json) {
-      var data1 = json;
-      var date = (data1["Meta Data"]["3. Last Refreshed"]);
-      var openPrice = (data1["Time Series (Daily)"][date]["1. open"]);
-      $.getJSON("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + Sym + "&interval=1min&apikey=XB3FP5FNA3EUUPGH", function(json1) {
-        var data3 = json1;
-        var date1 = (data3["Meta Data"]["3. Last Refreshed"]);
-        var currPrice = (data3["Time Series (1min)"][date1]["1. open"]);
-        var diffPrice = (parseFloat(currPrice) - parseFloat(openPrice)).toFixed(2);
-        if (diffPrice < 0) {
+
+
+
+
+  var getDataSide = function() {
+    $.get("https://api.iextrading.com/1.0/stock/market/list/mostactive?displayPercent=true", function(json) {
+      var batchReq = [];
+      for (w = 0; w < json.length; w++) {
+        batchReq[w] = (json[w].symbol);
+      }
+      // batchReq = batchReq.substring(0, batchReq.length - 1);
+      console.log(batchReq);
+      for (i = 0; i < batchReq.length; i++) {
+
+        //var json = JSON.parse(data);
+        var currSym = i;
+        var changeSign = "";
+        var color = "black";
+        var compName = (json[currSym].companyName);
+        console.log(compName);
+        var currPrice = (json[currSym].delayedPrice).toFixed(2);
+        var openPrice = (json[currSym].open).toFixed(2);
+        var diffPrice = (json[currSym].change).toFixed(2);
+        var perChange = (json[currSym].changePercent).toFixed(2);
+        if (perChange < 0) {
           changeSign = "-";
-          diffPrice = Math.abs(diffPrice);
+          color = "red";
+        } else {
+          changeSign = "";
+          color = "green";
         }
-        var perChange = ((((parseFloat(currPrice) / parseFloat(openPrice)) * 100) - 100).toFixed(2));
-        $("#t01").append("<tr><td>" + Sym + "</td><td>" + currPrice + "</td><td>" + diffPrice + "</td><td>" + perChange + "</td></tr>");
-      });
+        console.log(color);
+
+        $("#MN" + (i + 1)).replaceWith(compName + ":<br>$" + currPrice + "	" + "<span style='color:" + color + "'>$" + diffPrice + "	" + perChange + "%</span>")
+
+      }
     });
-  };
+  }
+  var getDataGain = function() {
+    $.get("https://api.iextrading.com/1.0/stock/market/list/gainers?displayPercent=true", function(json) {
+      var batchReq = [];
+      for (w = 0; w < json.length; w++) {
+        batchReq[w] = (json[w].symbol);
+      }
+      // batchReq = batchReq.substring(0, batchReq.length - 1);
+      console.log(batchReq);
+      for (i = 0; i < batchReq.length; i++) {
 
-  var loadSideM = function(iD, Sym) {
-    var changeSign = "";
-    $.getJSON("https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=" + Sym + "&outputsize=compact&apikey=XB3FP5FNA3EUUPGH", function(json) {
-      var data1 = json;
-      var date = (data1["Meta Data"]["3. Last Refreshed"]);
-      var openPrice = (data1["Time Series (Daily)"][date]["1. open"]);
-
-      $.getJSON("https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + Sym + "&interval=1min&apikey=XB3FP5FNA3EUUPGH", function(json1) {
-        var data3 = json1;
-        var date1 = (data3["Meta Data"]["3. Last Refreshed"]);
-        var currPrice = (data3["Time Series (1min)"][date1]["1. open"]);
-        $("#CP" + iD).replaceWith(Sym + " Current Price: $" + currPrice);
-        var diffPrice = (parseFloat(currPrice) - parseFloat(openPrice)).toFixed(2);
-        if (diffPrice < 0) {
+        //var json = JSON.parse(data);
+        var currSym = i;
+        var changeSign = "";
+        var color = "black";
+        var compName = (json[currSym].companyName)
+        console.log(compName);
+        var currPrice = (json[currSym].delayedPrice).toFixed(2);
+        var openPrice = (json[currSym].open).toFixed(2);
+        var diffPrice = (json[currSym].change).toFixed(2);
+        var perChange = (json[currSym].changePercent).toFixed(2);
+        if (perChange < 0) {
           changeSign = "-";
-          diffPrice = Math.abs(diffPrice);
+          color = "red";
+        } else {
+          changeSign = "";
+          color = "green";
         }
-        $("#MN" + iD).replaceWith(Sym + " Opening Price: $" + openPrice);
-        $("#DP" + iD).replaceWith(Sym + " $ Difference: " + changeSign + "$" + diffPrice);
-        var perChange = ((((parseFloat(currPrice) / parseFloat(openPrice)) * 100) - 100).toFixed(2));
-        $("#PC" + iD).replaceWith(Sym + " % Difference: " + perChange + "%");
-      });
+        $("#t01").append("<tr><td>" + compName + "</td><td>$" + currPrice + "</td><td><div style='color:" + color + "'>$" + diffPrice + "</div></td><td><div style='color:" + color + "'>" + perChange + "%</div></td></tr>");
+
+      }
     });
+  }
+  var getDataLose = function() {
+    $.get("https://api.iextrading.com/1.0/stock/market/list/losers?displayPercent=true", function(json) {
+      var batchReq = [];
+      for (w = 0; w < json.length; w++) {
+        batchReq[w] = (json[w].symbol);
+      }
+      for (i = 0; i < batchReq.length; i++) {
+        var currSym = i;
+        var changeSign = "";
+        var color = "black";
+        var compName = (json[currSym].companyName);
+        console.log(compName);
+        var currPrice = (json[currSym].delayedPrice).toFixed(2);
+        var openPrice = (json[currSym].open).toFixed(2);
+        var diffPrice = (json[currSym].change).toFixed(2);
+        var perChange = (json[currSym].changePercent).toFixed(2);
+        if (perChange < 0) {
+          changeSign = "-";
+          color = "red";
+        } else {
+          changeSign = "";
+          color = "green";
+        }
+        $("#t02").append("<tr><td>" + compName + "</td><td>$" + currPrice + "</td><td><div style='color:" + color + "'>$" + diffPrice + "</div></td><td><div style='color:" + color + "'>" + perChange + "%</div></td></tr>");
 
-  };
-
+      }
+    });
+  }
 
   var com = {
     1: function() {
-      loadMainM("NFLX")
+      getDataSide();
+      getDataGain();
+      getDataLose();
     },
     2: function() {
-      loadSideM("1", "BA")
-    },
-    3: function() {
-      loadMainM("LFIN")
-    },
-    4: function() {
-      loadSideM("2", "KO")
-    },
-    5: function() {
-      loadMainM("SBUX")
-    },
-    6: function() {
-      loadSideM("3", "SBUX")
-    },
-    7: function() {
-      loadMainM("DIS")
-    },
-    8: function() {
-      loadSideM("4", "DIS")
-    },
-    9: function() {
-      loadMainM("NDX")
-    },
-    10: function() {
-      loadSideM("5", "NDX")
-    },
-    11: function() {
-      loadMainM("AAPL")
-    },
-    12: function() {
-      loadSideM("6", "AAPL")
-    },
-    13: function() {
-      loadMainM("DJIA")
-    },
-    14: function() {
-      loadSideM("7", "DJIA")
-    },
-    15: function() {
-      loadMainM("MFST")
-    },
-    16: function() {
-      loadSideM("8", "MSFT")
-    },
-    17: function() {
-      loadMainM("GOOGL")
-    },
-    18: function() {
-      loadSideM("9", "GOOGL")
-    },
-    19: function() {
-      loadMainM("SPX")
-    },
-    20: function() {
-      loadSideM("10", "SPX")
-    },
-    21: function() {
       $("#loading").hide()
       $("#main").show()
     }
   }
-  console.log(Object.keys(com));
   var throttleActions = function(time) {
     var comLen = (Object.keys(com).length);
     for (i = 0; i < comLen; i++) {
       var myVar = setTimeout(com[Object.keys(com)[i]], (i * time))
     }
   };
-  throttleActions(3000);
+  throttleActions(((Math.floor(Math.random() * 4))*1000)+1000);
+
+
 });

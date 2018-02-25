@@ -4,8 +4,8 @@
   <head>
     <link href='https://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="static/js/home.js?ver=0.27"></script>
-    <link rel="stylesheet" type="text/css" href="static/css/main_page.css?ver=0.31" />
+    <script src="static/js/home.js?ver=0.33"></script>
+        <link rel="stylesheet" type="text/css" href="static/css/main_page.css?ver=0.37" />
     <title>NY Stock Monitor</title>
     <link rel="icon" type="image/x-icon" href="https://drive.google.com/uc?id=1l_PMNmhbZBwsTkYvXMCZv4Azzu6csC5x" />
   </head>
@@ -19,71 +19,54 @@
       <div class="topStyle">
         <img class="topStyle" id="topLogo" src="https://drive.google.com/uc?id=1X9xScWTkjACCSzFOmtWabd1sPKPK-O5w">
         <ul class="topMenu">
-          <li id="TM1"><a href="/">Home Page</a></li>
-          <li id="TM2"><a href="menu2">Buys</a></li>
-          <li id="TM3"><a href="menu3">Sells</a></li>
+          <li><a href="/">Home Page</a></li>
+          <li><a href="menu2">Buys</a></li>
+          <li><a href="menu3">Sells</a></li>
         </ul>
         <input id="searchBar" placeholder="Search Bar">
 
       </div>
       <br><br>
       <hr>
-      <ul class="sideMarket">
-        <li id="sideMarket1"><a id="MN1"></a><br>
-          <a id="CP1"></a><br>
-          <a id="DP1"></a><br>
-          <a id="PC1"></a></li>
-        <li id="sideMarket2"><a id="MN2"></a><br>
-          <a id="CP2"></a><br>
-          <a id="DP2"></a><br>
-          <a id="PC2"></a></li>
-        <li id="sideMarket3"><a id="MN3"></a><br>
-          <a id="CP3"></a><br>
-          <a id="DP3"></a><br>
-          <a id="PC3"></a></li>
-        <li id="sideMarket4"><a id="MN4"></a><br>
-          <a id="CP4"></a><br>
-          <a id="DP4"></a><br>
-          <a id="PC4"></a></li>
-        <li id="sideMarket5"><a id="MN5"></a><br>
-          <a id="CP5"></a><br>
-          <a id="DP5"></a><br>
-          <a id="PC5"></a></li>
-        <li id="sideMarket6"><a id="MN6"></a><br>
-          <a id="CP6"></a><br>
-          <a id="DP6"></a><br>
-          <a id="PC6"></a></li>
-        <li id="sideMarket7"><a id="MN7"></a><br>
-          <a id="CP7"></a><br>
-          <a id="DP7"></a><br>
-          <a id="PC7"></a></li>
-        <li id="sideMarket8"><a id="MN8"></a><br>
-          <a id="CP8"></a><br>
-          <a id="DP8"></a><br>
-          <a id="PC8"></a></li>
-        <li id="sideMarket9"><a id="MN9"></a><br>
-          <a id="CP9"></a><br>
-          <a id="DP9"></a><br>
-          <a id="PC9"></a></li>
-        <li id="sideMarket10"><a id="MN10"></a><br>
-          <a id="CP10"></a><br>
-          <a id="DP10"></a><br>
-          <a id="PC10"></a></li>
-
-      </ul>
-
-    <hr style="height:5px; visibility:hidden;" />
+      <div id="dataDisplay">
+        <ul class="sideMarket">
+          <li id="sideMarket1"><a id="MN1"></a></li>
+          <li id="sideMarket2"><a id="MN2"></a></li>
+          <li id="sideMarket3"><a id="MN3"></a></li>
+          <li id="sideMarket4"><a id="MN4"></a></li>
+          <li id="sideMarket5"><a id="MN5"></a></li>
+          <li id="sideMarket6"><a id="MN6"></a></li>
+          <li id="sideMarket7"><a id="MN7"></a></li>
+          <li id="sideMarket8"><a id="MN8"></a></li>
+          <li id="sideMarket9"><a id="MN9"></a></li>
+          <li id="sideMarket10"><a id="MN10"></a></li>
+        </ul>
+        <hr style="height:5px; visibility:hidden;" />
 
 
-      <div id="recomBuy">
-        <table id="t01" style="width:100%">
-          <tr>
-            <td>Symbol</td>
-            <td>Current Price</td>
-            <td>Change</td>
-            <td>% Change</td>
-          </tr>
-        </table>
+        <div id="recomBuy">
+            <caption><u>Recommended to Buy</u></caption>
+          <table id="t01" style="width:100%">
+            <tr>
+              <td><u>Symbol</u></td>
+              <td><u>Current Price</u></td>
+              <td><u>Change</u></td>
+              <td><u>% Change</u></td>
+            </tr>
+          </table>
+        </div>
+        <br>
+        <div id="recomSell">
+            <caption><u>Recommended to Sell</u></caption>
+          <table id="t02" style="width:100%">
+            <tr>
+              <td><u>Symbol</u></td>
+              <td><u>Current Price</u></td>
+              <td><u>Change</u></td>
+              <td><u>% Change</u></td>
+            </tr>
+          </table>
+        </div>
       </div>
 
       <div class="navbar">
@@ -95,6 +78,7 @@
         <!--Edit logo @logomakr.com/19oWaS-->
       </div>
     </div>
+    <div id="filler"></div>
   </body>
 
 </html>
