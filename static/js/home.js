@@ -38,7 +38,7 @@ $(document).ready(function() {
     });
   }
   var getDataGain = function() {
-    $.get("https://api.iextrading.com/1.0/stock/market/list/gainers?displayPercent=true", function(json) {
+    $.get("https://api.iextrading.com/1.0/stock/market/list/losers?displayPercent=true", function(json) {
       var batchReq = [];
       for (w = 0; w < json.length; w++) {
         batchReq[w] = (json[w].symbol);
@@ -70,7 +70,7 @@ $(document).ready(function() {
     });
   }
   var getDataLose = function() {
-    $.get("https://api.iextrading.com/1.0/stock/market/list/losers?displayPercent=true", function(json) {
+    $.get("https://api.iextrading.com/1.0/stock/market/list/gainers?displayPercent=true", function(json) {
       var batchReq = [];
       for (w = 0; w < json.length; w++) {
         batchReq[w] = (json[w].symbol);
