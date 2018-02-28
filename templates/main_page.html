@@ -4,8 +4,8 @@
   <head>
     <link href='https://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="static/js/home.js?ver=0.37"></script>
-        <link rel="stylesheet" type="text/css" href="static/css/main_page.css?ver=0.37" />
+    <script src="static/js/home.js?ver=0.392"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/main_page.css?ver=0.38" />
     <title>NY Stock Monitor</title>
     <link rel="icon" type="image/x-icon" href="https://drive.google.com/uc?id=1l_PMNmhbZBwsTkYvXMCZv4Azzu6csC5x" />
   </head>
@@ -26,7 +26,16 @@
         <input id="searchBar" placeholder="Search Bar">
 
       </div>
-      <br><br>
+      <br>
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span class="popup-close">&times;</span>
+          Content will go here
+          <div id="popup-info">
+          </div>
+        </div>
+      </div>
+      <br>
       <hr>
       <div id="dataDisplay">
         <ul class="sideMarket">
@@ -45,7 +54,7 @@
 
 
         <div id="recomBuy">
-            <caption><u>Recommended to Buy</u></caption>
+          <caption><u>Recommended to Buy</u></caption>
           <table id="t01" style="width:100%">
             <tr>
               <td><u>Name</u></td>
@@ -57,7 +66,7 @@
         </div>
         <br>
         <div id="recomSell">
-            <caption><u>Recommended to Sell</u></caption>
+          <caption><u>Recommended to Sell</u></caption>
           <table id="t02" style="width:100%">
             <tr>
               <td><u>Name</u></td>
@@ -68,7 +77,6 @@
           </table>
         </div>
       </div>
-
       <div class="navbar">
         <span><a href="#home">Home</a></span>
         <span><a href="#news">News</a></span>

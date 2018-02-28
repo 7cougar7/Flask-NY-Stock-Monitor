@@ -28,7 +28,7 @@ $(document).ready(function() {
           color = "red";
         } else {
           changeSign = "";
-          color = "green";
+          color = "#00CE00";
         }
         console.log(color);
 
@@ -62,7 +62,7 @@ $(document).ready(function() {
           color = "red";
         } else {
           changeSign = "";
-          color = "green";
+          color = "#00CE00";
         }
         $("#t01").append("<tr><td>" + compName + "</td><td>$" + currPrice + "</td><td><div style='color:" + color + "'>$" + diffPrice + "</div></td><td><div style='color:" + color + "'>" + perChange + "%</div></td></tr>");
 
@@ -90,7 +90,7 @@ $(document).ready(function() {
           color = "red";
         } else {
           changeSign = "";
-          color = "green";
+          color = "#00CE00";
         }
         $("#t02").append("<tr><td>" + compName + "</td><td>$" + currPrice + "</td><td><div style='color:" + color + "'>$" + diffPrice + "</div></td><td><div style='color:" + color + "'>" + perChange + "%</div></td></tr>");
 
@@ -109,13 +109,31 @@ $(document).ready(function() {
       $("#main").show()
     }
   }
+var modal = document.getElementById('popup');
+var btn = document.getElementById("sideMarket1");
+var span = document.getElementsByClassName("popup-close")[0];
+
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+span.onclick = function() {
+    modal.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }}
   var throttleActions = function(time) {
     var comLen = (Object.keys(com).length);
     for (i = 0; i < comLen; i++) {
       var myVar = setTimeout(com[Object.keys(com)[i]], (i * time))
     }
   };
-  throttleActions(((Math.floor(Math.random() * 4))*1000)+1000);
-
+      throttleActions(((Math.floor(Math.random() * 4)) * 1000) + 1000);
+/*	var d = new Date();
+	var time=(d.getHours()*3600)+(d.getMinutes())+d.getSeconds();
+  if(time<56700){
+    throttleActions(((Math.floor(Math.random() * 4)) * 1000) + 1000);
+  }*/
 
 });

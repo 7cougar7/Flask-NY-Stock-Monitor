@@ -1,5 +1,5 @@
-html{
-    background-color:#edf7ff;
+html {
+  background-color: #edf7ff;
 }
 
 #loading {
@@ -16,9 +16,11 @@ html{
   text-align: center;
   display: none
 }
-#recomSell{
-    display:grid;
+
+#recomSell {
+  display: grid;
 }
+
 #topLogo {
   height: 10%;
   width: 10%;
@@ -104,7 +106,7 @@ html{
   width: 100%;
   /* Full width */
   color: white;
-  height:20px;
+  height: 20px;
 }
 
 #recomBuy {
@@ -127,6 +129,46 @@ table tr:nth-child(even) {
   margin: 5em;
 }
 
-#filler{
-height:30px;
+#filler {
+  height: 30px;
 }
+
+/* The Modal (background) */
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.popup-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+
+.popup-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.popup-close:hover,
+.popup-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
