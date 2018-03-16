@@ -1,7 +1,7 @@
   var com = {
     1: function() {
       getDataSide();
-      searchResults();
+			
     },
     2: function() {
       for (i = 1; i < 11; i++) {
@@ -10,6 +10,7 @@
       importantStocks();
       $(".marquee").show();
       waitForSearch();
+			checkSearch();
     },
     3: function() {
       $("#loading").hide()

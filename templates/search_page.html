@@ -5,8 +5,8 @@
     <link href='https://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet'>
     <script src="{{ url_for('static', filename='js/Chart.bundle.min.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename= 'js/functions.js') }}?version=1.00"></script>
-    <script src="{{ url_for('static', filename='js/searchpage.js') }}?version=1.00"></script>
+    <script src="{{ url_for('static', filename= 'js/functions.js') }}?version=1.03"></script>
+    <script src="{{ url_for('static', filename='js/searchpage.js') }}?version=1.03"></script>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search_page.css') }}?version=1.00" />
     <script src="//cdn.jsdelivr.net/npm/jquery.marquee@1.5.0/jquery.marquee.min.js" type="text/javascript"></script>
     <title>NY Stock Monitor</title>
@@ -57,11 +57,18 @@
         <hr style="height:5px; visibility:hidden;" />
       </div>
 
-      	<div id="searchError">
-			<h1>You Have Reached a Dead End</h1>
-			<br>
-	    	<h3>Try a Different Search or Select a Menu Above</h3>
-    	</div>
+      <div id="searchError">
+        <h1>You Have Reached a Dead End</h1>
+        <br>
+        <h3>Try a Different Search or Select a Menu Above</h3>
+      </div>
+
+      <div id="possResults" style="display:grid">
+        <table id="resultsTable" style="width:100%">
+					<tr><td>Results</td></tr>
+        </table>
+      </div>
+			
       <div id="mainsizer" style="display:grid">
         <div id="maintitle"></div>
         <br>

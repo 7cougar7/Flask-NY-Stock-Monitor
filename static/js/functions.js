@@ -19,7 +19,7 @@
         var perChange = (json[i].changePercent).toFixed(2);
         if (perChange < 0) {
           color = "red";
-          perChange=Math.abs(perChange)
+          perChange = Math.abs(perChange)
         } else {
 
           color = "#32CD32";
@@ -53,7 +53,7 @@
         var perChange = (json[i].changePercent).toFixed(2);
         if (perChange < 0) {
           color = "red";
-          perChange=Math.abs(perChange)
+          perChange = Math.abs(perChange)
         } else {
           changeSign = "";
           color = "#32CD32";
@@ -82,7 +82,7 @@
         var perChange = (json[i].changePercent).toFixed(2);
         if (perChange < 0) {
           color = "red";
-          perChange=Math.abs(perChange)
+          perChange = Math.abs(perChange)
         } else {
           color = "#32CD32";
         }
@@ -175,7 +175,7 @@
     $.getJSON("https://api.iextrading.com/1.0/stock/market/batch?symbols=oneq,dia,spy,gold,oil&types=quote", function(json) {
       var dispSym = ["NASDAQ", 25, "DOW", 100, "S&P 500", 10, "GOLD", 1, "OIL", 1]
       var output = ""
-      console.log(Object.keys(json)[0])
+      //console.log(Object.keys(json)[0])
       for (i = 0; i < (Object.keys(json).length) / 2; i++) {
         var color;
         var perChange = (json[Object.keys(json)[2 * i]].quote.changePercent);
@@ -195,6 +195,41 @@
 
   }
 
+var checkSearch=function() {
+    var search = getImageDirectoryByFullURL(window.location.href).toLowerCase() //"ko".toLowerCase() //$("#searchBar").val().split(" ")
+    var searchArr = search.split(" ")
+    $.get("https://api.iextrading.com/1.0/ref-data/symbols", function(json) {
+      for (i = 0; i < Object.keys(json).length; i++) {
+        if (json[i].isEnabled == true) {
+          var temp = (json[i].name).split(" ")
+          temp[temp.length] = json[i].symbol
+					
+          if (temp[temp.length - 1].toLowerCase() == search) { //$("#searchBar").val()){
+            //alert("Search was a symbol: " +json[i].name)
+            searchResults();
+            break;
+            //location.replace("http://7cougar7.pythonanywhere.com/search/"+(temp[temp.length-1]));
+          }else{
+					//alert("search was a word")
+            for (w = 0; w < temp.length; w++) {
+              for (v = 0; v < searchArr.length; v++) {
+							//	alert(temp[w])
+							//	alert(searchArr[v])
+                if (temp[w].toLowerCase() == searchArr[v].toLowerCase()) {
+                  $("#resultsTable tr:last").after("<tr><td><a href='http://7cougar7.pythonanywhere.com/search/" + (temp[temp.length - 1]) + "'>" + json[i].name + "</a></td></tr>")
+                }
+              }
+            }
+        
+}
+
+          }
+        }
+                  $("#mainsizer").hide()
+            $("#searchError").hide()
+    })
+  }
+
   function getImageDirectoryByFullURL(url) {
     return url.substr(url.lastIndexOf("/") + 1);
   }
@@ -203,18 +238,20 @@
     $("#searchBar").on('keyup', function(e) {
       if (e.keyCode == 13) {
         //alert($('#searchBar').val())
-        location.replace("http://7cougar7.pythonanywhere.com/search/"+($('#searchBar').val()));
+        //checkSearch();
+        location.replace("http://7cougar7.pythonanywhere.com/search/" + $('#searchBar').val());
       }
     });
   }
 
   var searchResults = function() {
     var Sym = getImageDirectoryByFullURL(window.location.href)
-$("#mainsizer").hide()
+    $("#mainsizer").hide()
     //alert(getImageDirectoryByFullURL(window.location.href))
     $.get("https://api.iextrading.com/1.0/stock/" + Sym + "/batch?types=quote,chart&range=6m", function(json) {
-       		$("#searchError").hide()
-		$("#mainsizer").show()
+      $("#searchError").hide()
+      $("#mainsizer").show()
+      $("#possResults").hide()
       var points = [];
       var labels = [];
       var color = "black"
