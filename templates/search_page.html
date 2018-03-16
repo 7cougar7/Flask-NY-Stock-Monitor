@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet'>
+    <script src="{{ url_for('static', filename='js/Chart.bundle.min.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename= 'js/functions.js') }}?version=1.00"></script>
+    <script src="{{ url_for('static', filename='js/searchpage.js') }}?version=1.00"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/search_page.css') }}?version=1.00" />
+    <script src="//cdn.jsdelivr.net/npm/jquery.marquee@1.5.0/jquery.marquee.min.js" type="text/javascript"></script>
+    <title>NY Stock Monitor</title>
+    <link rel="icon" type="image/x-icon" href="https://drive.google.com/uc?id=1l_PMNmhbZBwsTkYvXMCZv4Azzu6csC5x" />
+  </head>
+
+  <body>
+    <div id="loading">
+      <img src="https://drive.google.com/uc?id=1GePgNLtCZuZqk-gGvqyIU01SeA0H84nH"><br>
+      <a id="underLogo">NY Stock Monitor</a>
+    </div>
+    <div id="main">
+      <div class="topStyle">
+        <img class="topStyle" id="topLogo" src="https://drive.google.com/uc?id=1X9xScWTkjACCSzFOmtWabd1sPKPK-O5w">
+        <ul class="topMenu">
+          <li><a href="/">Home Page</a></li>
+          <li><a href="menu2">Buys</a></li>
+          <li><a href="menu3">Sells</a></li>
+        </ul>
+        <input id="searchBar" placeholder="Search Bar">
+
+      </div>
+      <br>
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span class="popup-close">&times;
+        </span>
+          <div id="popup-message">
+            <canvas id='myChart'></canvas>
+          </div>
+        </div>
+      </div>
+      <br>
+      <hr>
+      <div id="dataDisplay">
+        <ul class="sideMarket">
+          <li id="sideMarket1"><a id="MN1"></a></li>
+          <li id="sideMarket2"><a id="MN2"></a></li>
+          <li id="sideMarket3"><a id="MN3"></a></li>
+          <li id="sideMarket4"><a id="MN4"></a></li>
+          <li id="sideMarket5"><a id="MN5"></a></li>
+          <li id="sideMarket6"><a id="MN6"></a></li>
+          <li id="sideMarket7"><a id="MN7"></a></li>
+          <li id="sideMarket8"><a id="MN8"></a></li>
+          <li id="sideMarket9"><a id="MN9"></a></li>
+          <li id="sideMarket10"><a id="MN10"></a></li>
+        </ul>
+        <hr style="height:5px; visibility:hidden;" />
+      </div>
+
+      	<div id="searchError">
+			<h1>You Have Reached a Dead End</h1>
+			<br>
+	    	<h3>Try a Different Search or Select a Menu Above</h3>
+    	</div>
+      <div id="mainsizer" style="display:grid">
+        <div id="maintitle"></div>
+        <br>
+
+        <canvas id='mainchart'></canvas>
+
+        <!--Edit logo @logomakr.com/19oWaS-->
+
+        <table id="t9" style="width:100%">
+          <tr>
+            <td>Last Updated:</td>
+            <td id="updated"></td>
+          </tr>
+          <tr>
+            <td>Current Price</td>
+            <td id="currPr"></td>
+          </tr>
+          <tr>
+            <td>Change since Opening</td>
+            <td id="diffPr"></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+    <div class="marquee" data-duplicated='true' data-gap="20"></div>
+    <div id="filler"></div>
+
+  </body>
+
+</html>

@@ -16,3 +16,8 @@ def menu2():
 @app.route('/menu3', methods=["GET"])
 def menu3():
     return render_template("menu3_page.html")
+
+@app.route('/search/<symbol>', methods=["GET"])
+def searchpage(symbol):
+    return render_template("search_page.html")
+    return "this is for the symbol %s" % symbol
