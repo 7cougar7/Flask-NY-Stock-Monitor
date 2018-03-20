@@ -178,3 +178,7 @@ table tr:nth-child(even) {
 #popup-message {
   height: 75vh;
 }
+
+#contactForm{
+	display:grid;
+}

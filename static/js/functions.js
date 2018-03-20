@@ -326,6 +326,35 @@ var checkSearch=function() {
   }
 
 
+
+var getDataMain = function(type,tableiD) {
+    $.get("https://api.iextrading.com/1.0/stock/market/list/"+type+"?displayPercent=true", function(json) {
+      var batchReq = [];
+      for (w = 0; w < json.length; w++) {
+        batchReq[w] = (json[w].symbol);
+      }
+      for (i = 0; i < batchReq.length; i++) {
+        var currSym = (json[i].symbol);
+        var changeSign = "";
+        var color = "black";
+        var compName = (json[i].companyName);
+        // console.log(compName);
+        var currPrice = Math.abs(json[i].delayedPrice).toFixed(2);
+        var openPrice = Math.abs(json[i].open).toFixed(2);
+        var diffPrice = Math.abs(json[i].change).toFixed(2);
+        var perChange = (json[i].changePercent).toFixed(2);
+        if (perChange < 0) {
+          color = "red";
+          perChange = Math.abs(perChange)
+        } else {
+          color = "#32CD32";
+        }
+        $("#"+tableiD).append("<tr id='MT" + (i + 1) + "'><td>" + compName + "</td><td>$" + currPrice + "</td><td><div style='color:" + color + "'>$" + diffPrice + "</div></td><td><div style='color:" + color + "'>" + perChange + "%</div><span id='MS" + (i + 1) + "'>" + currSym + "</span></td><td>$"+json[i].week52High.toFixed(2)+"</td><td>"+json[i].ytdChange.toFixed(2)+"</td></tr>");
+        document.getElementById("MS" + (i + 1)).style.display = "none";
+      }
+    });
+  }
+	
   var throttleActions = function(time) {
     var comLen = (Object.keys(com).length);
     for (i = 0; i < comLen; i++) {
