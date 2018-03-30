@@ -64,6 +64,13 @@
       }
     });
   }
+
+  var setLatestUpdate = function(){
+       $.get("https://api.iextrading.com/1.0/stock/market/list/losers?displayPercent=true", function(json) {
+            $("#lastUpd").append(json[0].latestTime);
+       });
+  }
+
   var getDataLose = function() {
     $.get("https://api.iextrading.com/1.0/stock/market/list/gainers?displayPercent=true", function(json) {
       var batchReq = [];
@@ -97,7 +104,11 @@
     var modal = document.getElementById('popup');
     var btn = document.getElementById(iD);
     var span = document.getElementsByClassName("popup-close")[0];
+    var name;
     $.get("https://api.iextrading.com/1.0/stock/" + Sym + "/chart/1y", function(json) {
+        $.get("https://api.iextrading.com/1.0/stock/"+Sym+"/batch?types=quote",function(json){
+            name=json.quote.companyName;
+        });
       var points = [];
       var labels = [];
       for (w = 0; w < Object.keys(json).length; w++) {
@@ -110,7 +121,7 @@
       //console.log(points)
       btn.onclick = function() {
         modal.style.display = "block";
-        $("#popup-message").replaceWith("<div id='popup-message'>" + Sym + "<canvas id='myChart'></canvas></div>")
+        $("#popup-message").replaceWith("<div id='popup-message'>" + name + " (1 Year)<canvas id='myChart'></canvas></div>")
         var ctx = document.getElementById('myChart').getContext('2d');
         var chart = new Chart(ctx, {
           // The type of chart we want to create
@@ -129,6 +140,14 @@
 
           // Configuration options go here
           options: {
+            animation: {
+                duration: 0, // general animation time
+              },
+          hover: {
+                animationDuration: 0, // duration of animations when hovering an item
+              },
+        responsiveAnimationDuration: 0, // animation duration after a resize
+
             legend: {
               display: false,
               onClick: (e) => e.stopPropagation()
@@ -172,23 +191,25 @@
   }
 
   var importantStocks = function() {
-    $.getJSON("https://api.iextrading.com/1.0/stock/market/batch?symbols=oneq,dia,spy,gold,oil&types=quote", function(json) {
-      var dispSym = ["NASDAQ", 25, "DOW", 100, "S&P 500", 10, "GOLD", 1, "OIL", 1]
+    $.getJSON("https://api.iextrading.com/1.0/stock/market/batch?symbols=oneq,dia,spy,gld,oil,ag&types=quote", function(json) {
+      var dispSym = ["NASDAQ", 25, "DOW", 100, "S&P 500", 10, "GOLD", 1, "OIL", 1,"SILVER",1]
       var output = ""
-      //console.log(Object.keys(json)[0])
-      for (i = 0; i < (Object.keys(json).length) / 2; i++) {
+      console.log(Object.keys(json))
+      console.log(((dispSym.length)/2)-1)
+      for (i = 0; i < ((dispSym.length)/2); i++) {
         var color;
-        var perChange = (json[Object.keys(json)[2 * i]].quote.changePercent);
+        console.log(Object.keys(json)[i])
+        var perChange = (json[(Object.keys(json)[i])].quote.changePercent);
         if (perChange < 0) {
-          color = "red";
+          color = "#E55353";
         } else {
           color = "#32CD32";
         }
-        output = output + "&emsp;&emsp;&emsp;&emsp;&emsp;" + dispSym[2 * i] + ": <span style='color:" + color + "'>$" + (json[Object.keys(json)[2 * i]].quote.latestPrice * (dispSym[(2 * i) + 1])).toFixed(2) + "</span> "
+        output = output + "&emsp;&emsp;&emsp;&emsp;&emsp;" + dispSym[2 * i] + ": <span style='color:" + color + "'>$" + (json[Object.keys(json)[i]].quote.latestPrice * (dispSym[(2 * i) + 1])).toFixed(2) + "</span> "
       }
       $(".marquee").append(output)
       $('.marquee').marquee({
-        duration: 5000,
+        duration: 9000,
         duplicated: true
       });
     })
@@ -203,7 +224,7 @@ var checkSearch=function() {
         if (json[i].isEnabled == true) {
           var temp = (json[i].name).split(" ")
           temp[temp.length] = json[i].symbol
-					
+
           if (temp[temp.length - 1].toLowerCase() == search) { //$("#searchBar").val()){
             //alert("Search was a symbol: " +json[i].name)
             searchResults();
@@ -220,7 +241,7 @@ var checkSearch=function() {
                 }
               }
             }
-        
+
 }
 
           }
@@ -354,7 +375,7 @@ var getDataMain = function(type,tableiD) {
       }
     });
   }
-	
+
   var throttleActions = function(time) {
     var comLen = (Object.keys(com).length);
     for (i = 0; i < comLen; i++) {

@@ -110,7 +110,8 @@ html {
   height: 20px;
 }
 
-#recomBuy {
+#recomBuy,
+#lastUp{
   display: grid;
 }
 

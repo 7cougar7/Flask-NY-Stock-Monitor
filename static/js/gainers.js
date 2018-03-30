@@ -2,6 +2,7 @@
     1: function() {
       getDataSide();
       getDataMain("gainers","t01")
+      setLatestUpdate();
     },
     2: function() {
       for (i = 1; i < 11; i++) {

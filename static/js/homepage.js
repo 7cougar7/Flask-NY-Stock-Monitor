@@ -3,6 +3,7 @@
       getDataSide();
       getDataGain();
       getDataLose();
+      setLatestUpdate();
     },
     2: function() {
       for (i = 1; i < 11; i++) {

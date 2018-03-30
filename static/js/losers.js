@@ -1,7 +1,8 @@
   var com = {
     1: function() {
       getDataSide();
-      getDataMain("losers","t02")
+      getDataMain("losers","t02");
+      setLatestUpdate();
     },
     2: function() {
       for (i = 1; i < 11; i++) {
