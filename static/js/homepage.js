@@ -15,8 +15,9 @@
       waitForSearch();
     },
     3: function() {
-      $("#loading").hide()
-      $("#main").show()
+      $("#loading").hide();
+      $("#main").show();
+      welcomeMessage();
     }
   }
 throttleActions(1000);

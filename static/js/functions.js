@@ -1,3 +1,23 @@
+  var welcomeMessage = function(){
+    var modal = document.getElementById('popup');
+    var span = document.getElementsByClassName("popup-close")[0];
+        modal.style.display = "block";
+        $('#popup-message').css("height","75vh");
+        $("#popup-message").replaceWith("<div id='popup-message'><br><span id='welcomeTitle' class='welcome'>Welcome to NY Stock Monitor!</span><br><br><span id='welcomeMessage'><br><br>This website provides a method of monitoring the New York Stock Exchange.<br>You will receive recommendations on the best stocks to buy and sell based on the percentage trends for the day.<br><br>Click on any company name or symbol to view a historical graph of that company's stock for the last year<br><br><br><br><span class='welcome' id='welcomeEnjoy'>Enjoy!</span><br><br><span id='welcomePowered'>Data provided for free by <a href='https://iextrading.com/developer/'>IEX</a></span><br>Box graphic by <a href='/'>NY Stock Monitor</a> from <a href='https://logomakr.com/'>Logomakr</a> is licensed under <a href='http://creativecommons.org/licenses/by/3.0/' title='Creative Commons BY 3.0'>CC BY 3.0</a><br></span><br><br><a href='/terms'>Terms of Service</a></div>")
+
+      span.onclick = function() {
+        modal.style.display = "none";
+        $("#popup-message").replaceWith("<div id='popup-message'>" + Sym + "<canvas id='myChart" + Sym + "'></canvas></div>")
+        $('#popup-message').css("height","75vh");
+      }
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+          $('#popup-message').css("height","75vh");
+        }
+      }
+  }
+
   var getDataSide = function() {
     $.get("https://api.iextrading.com/1.0/stock/market/list/mostactive?displayPercent=true", function(json) {
       var batchReq = [];
@@ -31,6 +51,7 @@
       }
     });
   }
+
   var getDataGain = function() {
     $.get("https://api.iextrading.com/1.0/stock/market/list/losers?displayPercent=true", function(json) {
       var batchReq = [];
@@ -191,8 +212,8 @@
   }
 
   var importantStocks = function() {
-    $.getJSON("https://api.iextrading.com/1.0/stock/market/batch?symbols=oneq,dia,spy,gld,oil,ag&types=quote", function(json) {
-      var dispSym = ["NASDAQ", 25, "DOW", 100, "S&P 500", 10, "GOLD", 1, "OIL", 1,"SILVER",1]
+    $.getJSON("https://api.iextrading.com/1.0/stock/market/batch?symbols=oneq,dia,spy,gld,oil,ag,amzn,msft&types=quote", function(json) {
+      var dispSym = ["NASDAQ", 25, "DOW", 100, "S&P 500", 10, "GOLD", 1, "OIL", 1,"SILVER",1,"AMZN",1,"MFST",1]
       var output = ""
       console.log(Object.keys(json))
       console.log(((dispSym.length)/2)-1)
@@ -216,12 +237,19 @@
 
   }
 
-var checkSearch=function() {
+  var checkSearch=function() {
     var search = getImageDirectoryByFullURL(window.location.href).toLowerCase() //"ko".toLowerCase() //$("#searchBar").val().split(" ")
     var searchArr = search.split(" ")
-    $.get("https://api.iextrading.com/1.0/ref-data/symbols", function(json) {
+    var queryString = "/content?symbol=" + search;
+    $.get(queryString, function(json) {
+        //console.log(json)
+
+    if(Object.keys(json).length>0){
+        if (json[0].symbol==search){
+            searchResults();
+        }
+
       for (i = 0; i < Object.keys(json).length; i++) {
-        if (json[i].isEnabled == true) {
           var temp = (json[i].name).split(" ")
           temp[temp.length] = json[i].symbol
 
@@ -243,11 +271,15 @@ var checkSearch=function() {
             }
 
 }
-
-          }
         }
                   $("#mainsizer").hide()
             $("#searchError").hide()
+
+    }else{
+        $("#possResults").hide()
+        $("#mainsizer").hide()
+        $("#searchError").show()
+    }
     })
   }
 
@@ -346,9 +378,7 @@ var checkSearch=function() {
 
   }
 
-
-
-var getDataMain = function(type,tableiD) {
+  var getDataMain = function(type,tableiD) {
     $.get("https://api.iextrading.com/1.0/stock/market/list/"+type+"?displayPercent=true", function(json) {
       var batchReq = [];
       for (w = 0; w < json.length; w++) {
