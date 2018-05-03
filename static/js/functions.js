@@ -135,7 +135,7 @@
       for (w = 0; w < Object.keys(json).length; w++) {
         points[(2 * w)] = (parseFloat(json[w]["open"]));
         points[(2 * w) + 1] = (parseFloat(json[w]["close"]));
-        labels[w] = JSON.stringify(w + 1)
+        labels[w] = (JSON.stringify(w + 1))
       }
       labels[Object.keys(json).length] = Object.keys(json).length;
 
@@ -149,6 +149,7 @@
           type: 'line',
 
           // The data for our dataset
+          labels: ("Price ($)"),
           data: {
             labels: labels,
             datasets: [{
@@ -176,8 +177,27 @@
             },
             scales: {
               xAxes: [{
-                display: false
-              }]
+                display: true,
+                scaleLabel: {
+							display: true,
+							labelString: 'Time (Days)',
+							fontSize: 18
+						},
+                ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function(value, index, values) {
+                        return ""
+                    }
+                }
+              }],
+                yAxes: [{
+                ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function(value, index, values) {
+                        return '$' + value;
+                    }
+                }
+            }]
             },
             maintainAspectRatio: false,
             responsive: true,
